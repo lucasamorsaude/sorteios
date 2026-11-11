@@ -4,7 +4,7 @@
  */
 window.CONFIG = {
   // URL da implantação do Apps Script (continua a mesma se publicar como "Nova versão")
-  apiUrl: 'https://script.google.com/macros/s/AKfycbyrWFUM3NG484UOI4lk9Mw0bkliGm0VIwCtiLyvoOfCROxMEc77hP_6vfzegU1CGZ-_/exec',
+  apiUrl: 'https://script.google.com/macros/s/AKfycbzJjAnElX4wp9KrArYKEU5foVnnYa9FHvRj_S_a4WBnjaF4K1uc10LbRDpD69_CkKLf/exec',
 
   ano: 2026,
   organizacao: 'AS e CDT · São João del-Rei',
