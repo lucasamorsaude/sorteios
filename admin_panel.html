@@ -1,66 +1,175 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel Administrativo</title>
-    <link rel="stylesheet" href="adm_panel.css">
+    <title>Sistema da Rifa</title>
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#0b3d22">
+    <link rel="icon" href="assets/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="admin.css">
 </head>
 <body>
-    <div class="admin-wrapper">
-        <div class="admin-container">
-            <h2>Cadastrar Novo Participante</h2>
-            
-            <form id="cadastro-form" class="form-grid">
-                <!-- Primeira Coluna -->
-                <div class="input-group">
-                    <label for="nome">Nome Completo</label>
-                    <input type="text" id="nome" required>
+    <!-- LOGIN -->
+    <main class="login" id="tela-login">
+        <form class="login-box" id="form-login" novalidate>
+            <img src="assets/favicon.png" alt="" width="48" height="48">
+            <h1>Sistema da Rifa</h1>
+            <p class="muted">Natal Solidário · entre com o seu PIN de vendedor</p>
+            <label class="campo">
+                <span>PIN</span>
+                <input type="password" id="pin" inputmode="numeric" autocomplete="current-password" maxlength="12" required>
+            </label>
+            <label class="check"><input type="checkbox" id="lembrar" checked> Lembrar neste aparelho</label>
+            <button type="submit" class="btn btn-prim largo" id="btn-entrar">Entrar</button>
+            <p class="msg" id="login-msg" role="alert"></p>
+        </form>
+    </main>
+
+    <!-- SISTEMA -->
+    <div class="app" id="app" hidden>
+      <div class="barra">
+        <header class="topo">
+            <div class="quem">
+                <span class="ola">Olá,</span> <b id="quem-nome"></b>
+                <span class="pill" id="quem-perfil"></span>
+            </div>
+            <div class="topo-dir">
+                <span class="prog-mini" id="prog-mini" title="Números com dono"></span>
+                <button type="button" class="sync" id="btn-sync" aria-label="Sincronizar">
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 0 0-14.3-4.9L4 8"/><path d="M4 3v5h5"/><path d="M4 13a8 8 0 0 0 14.3 4.9L20 16"/><path d="M20 21v-5h-5"/></svg>
+                    <span id="sync-txt">Sincronizar</span>
+                </button>
+                <button type="button" class="btn btn-sec peq" id="btn-sair">Sair</button>
+            </div>
+        </header>
+
+        <nav class="abas" role="tablist">
+            <button type="button" role="tab" data-aba="venda" aria-selected="true">Novo cadastro</button>
+            <button type="button" role="tab" data-aba="vendas" aria-selected="false"><span id="aba-vendas-txt">Meus cadastros</span></button>
+            <button type="button" role="tab" data-aba="ranking" aria-selected="false">Ranking</button>
+            <button type="button" role="tab" data-aba="equipe" aria-selected="false" id="aba-btn-equipe" hidden>Equipe</button>
+        </nav>
+      </div>
+
+        <!-- NOVO CADASTRO -->
+        <section class="painel" id="aba-venda" role="tabpanel">
+            <form id="form-venda" class="cartao" novalidate>
+                <h2>Participante</h2>
+                <div class="grid2">
+                    <label class="campo"><span>Nome completo *</span><input type="text" id="v-nome" autocomplete="off" required maxlength="120"></label>
+                    <label class="campo"><span>Telefone (WhatsApp) *</span><input type="tel" id="v-telefone" inputmode="tel" autocomplete="off" required placeholder="(32) 99999-9999"></label>
+                    <label class="campo"><span>E-mail <small>(opcional, recebe confirmação)</small></span><input type="email" id="v-email" autocomplete="off" maxlength="120"></label>
+                    <label class="campo"><span>Data de nascimento *</span><input type="date" id="v-nasc" required></label>
                 </div>
-                
-                <div class="input-group">
-                    <label for="telefone">Telefone (WhatsApp)</label>
-                    <input type="tel" id="telefone" required>
-                </div>
-                
-                <!-- Segunda Coluna -->
-                <div class="input-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email">
-                </div>
-                
-                <div class="input-group">
-                    <label for="data_nascimento">Data de Nascimento</label>
-                    <input type="date" id="data_nascimento">
-                </div>
-                
-                <!-- Campos que ocupam largura total -->
-                <div class="input-group full-width">
-                    <label for="vendedor">Vendedor</label>
-                    <input type="text" id="vendedor" required>
-                </div>
-                
-                <!-- Número da Rifa (centralizado) -->
-                <div class="input-group full-width">
-                    <label for="numero_rifa">Número da Rifa</label>
-                    <div class="numero-input-wrapper">
-                        <input type="number" id="numero_rifa" min="1" max="1000" placeholder="Digite o número" required>
-                        <span id="numero-status"></span>
+                <p class="dica">Telefone ou e-mail + nascimento é o que a pessoa usa para consultar os números no site.</p>
+
+                <h2>Números</h2>
+                <div class="campo">
+                    <span id="qtd-rot">Quantos números a pessoa vai escolher? *</span>
+                    <div class="qtd" role="group" aria-labelledby="qtd-rot">
+                        <button type="button" class="btn btn-sec" id="qtd-menos" aria-label="Diminuir">−</button>
+                        <input type="number" id="v-qtd" inputmode="numeric" min="1" max="50" step="1" placeholder="0" aria-labelledby="qtd-rot">
+                        <button type="button" class="btn btn-sec" id="qtd-mais" aria-label="Aumentar">+</button>
                     </div>
                 </div>
-                
-                <!-- Botões -->
-                <div class="button-group full-width">
-                    <button type="submit" id="submit-btn">Cadastrar</button>
-                    <button type="button" id="clear-btn">Limpar Formulário</button>
+                <label class="campo">
+                    <span>Números escolhidos * <small>(toque na grade ou digite: 12, 15, 40-42)</small></span>
+                    <input type="text" id="v-numeros" inputmode="numeric" autocomplete="off" placeholder="Escolha na grade abaixo">
+                </label>
+                <div class="chips" id="chips" aria-live="polite"></div>
+                <button type="button" class="btn btn-sec peq" id="btn-grade" aria-expanded="true">Fechar grade</button>
+                <div class="mini-grade" id="mini-grade"></div>
+
+                <div class="resumo">
+                    <span id="resumo">Informe a quantidade de números</span>
+                    <button type="submit" class="btn btn-prim" id="btn-registrar" disabled>Registrar</button>
                 </div>
-                
-                <!-- Mensagem de Status -->
-                <p id="status-message" class="full-width"></p>
+                <p class="msg" id="venda-msg" role="alert"></p>
             </form>
-        </div>
+
+            <div class="cartao sucesso" id="sucesso" hidden>
+                <div class="ok-ic">✓</div>
+                <h2>Cadastro feito!</h2>
+                <p id="sucesso-txt"></p>
+                <p class="aviso" id="sucesso-aviso" hidden></p>
+                <div class="botoes">
+                    <button type="button" class="btn btn-prim" id="btn-nova">Novo cadastro</button>
+                    <button type="button" class="btn btn-sec" id="btn-mesmo">Mais números p/ a mesma pessoa</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- CADASTROS -->
+        <section class="painel" id="aba-vendas" role="tabpanel" hidden>
+            <div class="kpis" id="kpis"></div>
+            <div class="filtros cartao">
+                <input type="search" id="f-busca" placeholder="Nome, telefone ou nº" aria-label="Buscar cadastros">
+                <div class="fchips" id="f-status" role="group" aria-label="Filtrar por situação">
+                    <button type="button" data-st="" aria-pressed="true">Todos</button>
+                    <button type="button" data-st="ATIVO" aria-pressed="false">Ativos</button>
+                    <button type="button" data-st="CANCELADO" aria-pressed="false">Cancelados</button>
+                </div>
+                <select id="f-vendedor" aria-label="Filtrar por vendedor" hidden><option value="">Todos os vendedores</option></select>
+                <button type="button" class="btn btn-sec peq" id="btn-csv" hidden>Exportar CSV</button>
+            </div>
+            <p class="contagem muted" id="contagem"></p>
+            <div class="lista" id="lista"></div>
+        </section>
+
+        <!-- RANKING -->
+        <section class="painel" id="aba-ranking" role="tabpanel" hidden>
+            <div class="cartao">
+                <h2>Ranking de vendedores</h2>
+                <p class="muted">Números cadastrados por cada vendedor (sem os cancelados) e quantas pessoas.</p>
+                <ol class="ranking" id="ranking"></ol>
+            </div>
+        </section>
+
+        <!-- EQUIPE (só admin) -->
+        <section class="painel" id="aba-equipe" role="tabpanel" hidden>
+            <form class="cartao" id="form-equipe" novalidate>
+                <h2>Cadastrar pessoa da equipe</h2>
+                <div class="equipe-form">
+                    <label class="campo"><span>Nome *</span><input type="text" id="u-nome" autocomplete="off" maxlength="60" placeholder="Ex.: Maria Silva"></label>
+                    <label class="campo"><span>Perfil</span>
+                        <select id="u-perfil">
+                            <option value="vendedor">Vendedor</option>
+                            <option value="admin">Administrador</option>
+                        </select>
+                    </label>
+                    <button type="submit" class="btn btn-prim" id="btn-add-user">Cadastrar</button>
+                </div>
+                <p class="dica">O sistema gera um PIN de 6 dígitos. Ele aparece só uma vez: repasse para a pessoa na hora.</p>
+                <p class="msg" id="equipe-msg" role="alert"></p>
+            </form>
+
+            <div class="cartao pin-novo" id="pin-novo" hidden>
+                <p class="muted" id="pin-novo-quem"></p>
+                <p class="pin-num" id="pin-novo-num"></p>
+                <p class="dica">Este PIN não aparece de novo. Se perder, gere um novo na lista abaixo.</p>
+                <div class="botoes">
+                    <button type="button" class="btn btn-prim" id="btn-pin-copiar">Copiar mensagem</button>
+                    <a class="btn btn-sec" id="btn-pin-zap" target="_blank" rel="noopener">Enviar pelo WhatsApp</a>
+                    <button type="button" class="btn btn-sec" id="btn-pin-ok">Pronto</button>
+                </div>
+            </div>
+
+            <div class="cartao">
+                <h2>Equipe</h2>
+                <p class="muted">Quem está desativado não consegue entrar, mas os cadastros dele continuam valendo.</p>
+                <div class="equipe-lista" id="equipe-lista"></div>
+            </div>
+        </section>
     </div>
 
+    <div class="toast" id="toast" role="status" hidden></div>
+
+    <script src="config.js"></script>
+    <script src="api.js"></script>
     <script src="admin.js"></script>
 </body>
 </html>
