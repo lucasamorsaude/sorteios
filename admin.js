@@ -11,6 +11,7 @@
     let filtro = { st: '', busca: '', vendedor: '' };
     let abaAtual = 'venda';
     let ultimoParticipante = null;
+    $('login-sub').textContent = C.titulo + ' · entre com o seu PIN de vendedor';
 
     // ------------------------------------------------------------ util
     function el(tag, cls, txt) {
@@ -468,7 +469,7 @@
         const itens = vendasFiltradas();
         $('contagem').textContent = plural(itens.length, 'registro', 'registros');
         if (!itens.length) {
-            lista.appendChild(el('p', 'vazio', dados.vendas.length ? 'Nenhum cadastro com esses filtros.' : 'Nenhum cadastro ainda. 🎄'));
+            lista.appendChild(el('p', 'vazio', dados.vendas.length ? 'Nenhum cadastro com esses filtros.' : 'Nenhum cadastro ainda.'));
             return;
         }
         const frag = document.createDocumentFragment();
@@ -528,7 +529,7 @@
         const blob = new Blob(['﻿' + csv], { type: 'text/csv;charset=utf-8' });
         const a = document.createElement('a');
         a.href = URL.createObjectURL(blob);
-        a.download = 'rifa-' + C.ano + '-cadastros.csv';
+        a.download = 'sorteio-' + C.ano + '-cadastros.csv';
         document.body.appendChild(a); a.click(); a.remove();
         setTimeout(() => URL.revokeObjectURL(a.href), 1000);
     });
@@ -560,7 +561,7 @@
     let pinMostrado = null; // { nome, pin }
 
     function mensagemPin(nome, p) {
-        return 'Olá, ' + nome + '! Seu acesso ao Sistema da Rifa Natal Solidário:\n' +
+        return 'Olá, ' + nome + '! Seu acesso ao sistema do sorteio ' + C.titulo + ':\n' +
             (C.urlSistema || location.href.split('#')[0]) + '\n\nSeu PIN: ' + p + '\n\nNão passe o PIN para ninguém.';
     }
 

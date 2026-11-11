@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Sobe o site da rifa localmente para visualizar no navegador.
+Sobe o site do sorteio localmente para visualizar no navegador.
 
 Uso:
     python servidor_local.py            # abre http://localhost:8000
@@ -56,7 +56,7 @@ def ip_da_rede():
 
 
 def main():
-    ap = argparse.ArgumentParser(description="Servidor local do Natal Solidário")
+    ap = argparse.ArgumentParser(description="Servidor local do sorteio")
     ap.add_argument("--porta", type=int, default=8000, help="porta inicial (padrão 8000)")
     ap.add_argument("--rede", action="store_true", help="aceitar conexões de outros aparelhos da rede")
     ap.add_argument("--sem-navegador", action="store_true", help="não abrir o navegador automaticamente")
@@ -69,7 +69,7 @@ def main():
 
     base = "http://localhost:%d" % porta
     print()
-    print("  Natal Solidário rodando localmente")
+    print("  Site do sorteio rodando localmente")
     print("  Site:   %s/" % base)
     print("  Admin:  %s/admin_panel.html" % base)
     if args.rede:

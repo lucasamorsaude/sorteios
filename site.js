@@ -20,7 +20,7 @@
     // ---------------------------------------------------------------- textos
     function preencherTextos() {
         // selo e título (trecho em destaque fica dourado)
-        const selo = C.selo || ['Rifa', 'Solidária'];
+        const selo = C.selo || ['Sorteio', String(C.ano)];
         $('selo').querySelector('b').textContent = selo[0];
         $('selo').querySelector('i').textContent = selo[1] || '';
         $('selo').hidden = !selo[0];
@@ -38,7 +38,7 @@
             weekday: 'long', day: 'numeric', month: 'long', timeZone: 'America/Sao_Paulo',
         }) + ' às ' + sorteio.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit', timeZone: 'America/Sao_Paulo' });
         $('org').textContent = C.organizacao;
-        $('zap-rodape').href = Util.linkWhatsapp(C.whatsapp, 'Olá! Tenho uma dúvida sobre a rifa ' + C.titulo + '.');
+        $('zap-rodape').href = Util.linkWhatsapp(C.whatsapp, 'Olá! Tenho uma dúvida sobre o sorteio ' + C.titulo + '.');
 
         $('pr-titulo').textContent = C.premio.titulo;
         $('pr-sub').textContent = C.premio.subtitulo;
@@ -104,7 +104,7 @@
     function mostrarPosSorteio() {
         $('cd-titulo').textContent = 'Sorteio realizado!';
         $('timer').hidden = true;
-        $('data-sorteio').textContent = 'Obrigado a todos que participaram e ajudaram esta ação solidária.';
+        $('data-sorteio').textContent = 'Obrigado a todos que participaram!';
         const r = C.resultado || {};
         if (r.numero) {
             const box = $('resultado');
@@ -155,10 +155,10 @@
         const det = document.createElement('small');
         if (sorteio <= new Date()) {
             forte.textContent = ocup + ' números escolhidos';
-            det.textContent = 'Obrigado por ajudar esta ação solidária.';
+            det.textContent = 'Obrigado a todos que participaram!';
         } else if (livres === 0) {
             forte.textContent = 'Todos os números já foram escolhidos! 🎉';
-            det.textContent = 'Obrigado por ajudar esta ação solidária.';
+            det.textContent = 'Obrigado a todos que participaram!';
         } else if (pctOcup >= 90) {
             forte.textContent = 'Últimos números! Restam só ' + livres + '.';
             det.textContent = 'Fale com um vendedor antes que acabe.';

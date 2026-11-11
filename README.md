@@ -1,13 +1,13 @@
-# Rifa Natal Solidário
+# Sorteio Black November CDT e AS
 
-Site da rifa: contagem regressiva, progresso, prêmio e consulta do comprador. A escolha dos
+Site do sorteio: contagem regressiva, progresso, prêmio e consulta do comprador. A escolha dos
 números é feita só pelos vendedores, no sistema. Inclui o
-**Sistema da Rifa** (`admin_panel.html`), onde cada vendedor entra com seu PIN.
+**Sistema do Sorteio** (`admin_panel.html`), onde cada vendedor entra com seu PIN.
 
 - **Site:** GitHub Pages (`index.html`)
 - **Servidor:** Google Apps Script (`codigo.gs`) + planilha Google
 
-## Como funciona a rifa
+## Como funciona o sorteio
 
 Não há preço por número. Conforme o motivo, cada pessoa tem direito a uma quantidade de números.
 No sistema, o vendedor informa **quantos números** a pessoa vai escolher e marca exatamente essa
@@ -23,11 +23,11 @@ O número vale assim que é cadastrado (não existe reservado ou pago).
 | `admin_panel.html`, `admin.css`, `admin.js` | Sistema dos vendedores |
 | `api.js` | Comunicação com o Apps Script (compartilhado) |
 | `codigo.gs` | Cópia do código do Apps Script (é colado à mão no editor do Google) |
-| `assets/` | Fundo (`fundo.webp` e `fundo-mobile.webp`), ícones e `og.jpg` (prévia no WhatsApp) |
+| `assets/` | Ícones (`favicon.svg`, `favicon.png`, `apple-touch-icon.png`) e `og.jpg` (prévia no WhatsApp). O fundo do site é só CSS |
 
 ## Planilha
 
-- **Aba `Rifa 2026`**: uma linha por número.
+- **Aba `Rifa 2026`** (nome antigo mantido para não perder os cadastros): uma linha por número.
   Colunas: Data · Nome · Telefone · E-mail · Nascimento · Vendedor · Número · Status · Atualizado em · Atualizado por.
   Status: `ATIVO` ou `CANCELADO` (o cancelado libera o número).
 - **Aba `Vendedores`**: Nome · PIN · Perfil (`admin` ou `vendedor`) · Ativo (`SIM`/`NÃO`).
@@ -54,8 +54,7 @@ O número vale assim que é cadastrado (não existe reservado ou pago).
 1. `config.js`: `ano`, `dataSorteio`, `totalNumeros`, textos e itens do prêmio.
 2. `codigo.gs` (bloco `CONFIG`): `ABA_VENDAS` (ex.: `Rifa 2027`), `TOTAL_NUMEROS`,
    `MAX_NUMEROS_POR_CADASTRO`, `PREMIO`, `DATA_SORTEIO_TEXTO`. Cole no Apps Script, rode `setup` e publique como nova versão.
-3. Troque a arte em `assets/` (fundo 1920×1080 em WebP, até ~250 KB; versão de celular 720×1280;
-   `og.jpg` 1200×630). Para usar fotos do prêmio, coloque os arquivos em `assets/premio/` e preencha
+3. Se mudar a identidade visual, troque os ícones e o `og.jpg` (1200×630) em `assets/`. Para usar fotos do prêmio, coloque os arquivos em `assets/premio/` e preencha
    `imagem` em cada item do `config.js`.
 4. A aba do ano anterior fica guardada na planilha.
 

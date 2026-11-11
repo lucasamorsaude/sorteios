@@ -4,13 +4,13 @@
  */
 window.CONFIG = {
   // URL da implantação do Apps Script (continua a mesma se publicar como "Nova versão")
-  apiUrl: 'https://script.google.com/macros/s/AKfycbw9mHFjKII0qtRomZ5umu2qfJEbV1TTNw4HZENB_YQLY-ybT7GICsU0vIxJYq6Dpzs/exec',
+  apiUrl: 'https://script.google.com/macros/s/AKfycbyrWFUM3NG484UOI4lk9Mw0bkliGm0VIwCtiLyvoOfCROxMEc77hP_6vfzegU1CGZ-_/exec',
 
   ano: 2026,
   organizacao: 'AS e CDT · São João del-Rei',
   titulo: 'Black November CDT e AS',
   tituloDestaque: 'Black November', // trecho do título em dourado (vazio = última palavra)
-  selo: ['Rifa', 'Solidária'],       // etiqueta acima do título: parte cheia + parte contornada
+  selo: ['Sorteio', '2026'],         // etiqueta acima do título: parte cheia + parte contornada
   chamada: 'Concorra a um kit completo de eletrodomésticos.',
 
   // Data e hora do sorteio (horário de Brasília). A DEFINIR: confirme antes de publicar.
@@ -22,13 +22,13 @@ window.CONFIG = {
   whatsapp: '553239380908', // só dígitos, com 55 + DDD
 
   // Endereço do sistema dos vendedores (vai na mensagem com o PIN de quem é cadastrado)
-  urlSistema: 'https://lucasamorsaude.github.io/Natal-Solidario/admin_panel.html',
+  urlSistema: 'https://lucasamorsaude.github.io/sorteios/admin_panel.html',
 
   premio: {
     titulo: 'O prêmio',
     subtitulo: 'Um único ganhador leva o kit completo.',
     itens: [
-      { nome: 'Batedeira', detalhe: 'Para os bolos e panetones de fim de ano', icone: 'batedeira' },
+      { nome: 'Batedeira', detalhe: 'Bolos, massas e receitas caprichadas', icone: 'batedeira' },
       { nome: 'Liquidificador', detalhe: 'Sucos, vitaminas e receitas do dia a dia', icone: 'liquidificador' },
       { nome: 'Churrasqueira', detalhe: 'Para reunir a família e os amigos', icone: 'churrasqueira' },
       { nome: 'Ventilador', detalhe: 'Alívio garantido no calor de dezembro', icone: 'ventilador' },

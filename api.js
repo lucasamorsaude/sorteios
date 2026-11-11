@@ -21,7 +21,7 @@
         'padding:16px 22px;box-shadow:0 18px 45px rgba(0,0,0,.35);font:600 1rem/1.3 Poppins,system-ui,sans-serif;' +
         'opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease}' +
         '.espera.vis .espera-box{opacity:1;transform:none}' +
-        '.espera-spin{width:26px;height:26px;flex:none;border-radius:50%;border:3px solid #e2e2e2;border-top-color:var(--espera-cor,#1f8a4c);' +
+        '.espera-spin{width:26px;height:26px;flex:none;border-radius:50%;border:3px solid #e2e2e2;border-top-color:var(--espera-cor,#f5b301);' +
         'animation:espera-gira .8s linear infinite}' +
         '@keyframes espera-gira{to{transform:rotate(360deg)}}' +
         '@media (prefers-reduced-motion:reduce){.espera-spin{animation-duration:2s}}';

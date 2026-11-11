@@ -1,5 +1,5 @@
 /**
- * Natal Solidário: servidor da rifa (Google Apps Script)
+ * Sorteio Black November CDT e AS: servidor do sorteio (Google Apps Script)
  * ---------------------------------------------------------------------------
  * COMO PUBLICAR
  * 1. Cole este arquivo inteiro no editor do Apps Script (substituindo o antigo).
@@ -14,23 +14,23 @@
  */
 const CONFIG = {
   SPREADSHEET_ID: '1kl_hfJ8om28uKbdq5rWbkgA7Goc4QFkJgYiKDsP5xVA',
-  ABA_VENDAS: 'Rifa 2026',
+  ABA_VENDAS: 'Rifa 2026', // nome da aba na planilha: não renomeie (os cadastros estão nela)
   ABA_VENDEDORES: 'Vendedores',
   TOTAL_NUMEROS: 1000, // igual ao totalNumeros do config.js
-  CAMPANHA: 'Rifa Natal Solidário AS e CDT - SJDR',
+  CAMPANHA: 'Sorteio Black November CDT e AS - SJDR',
   TITULO: 'Black November CDT e AS',            // nome curto (remetente e título do e-mail)
-  SELO: 'Rifa Solidária',                       // etiqueta no topo do e-mail
+  SELO: 'Sorteio 2026',                         // etiqueta no topo do e-mail
   ORGANIZACAO: 'AS e CDT · São João del-Rei',
   PREMIO: 'Kit eletrodomésticos: batedeira, liquidificador, churrasqueira, ventilador e misteira',
   DATA_SORTEIO_TEXTO: '04/12/2026 às 15h', // A DEFINIR: igual ao dataSorteio do config.js
-  LINK_SITE: 'https://bit.ly/natalASCDT',
+  LINK_SITE: 'https://lucasamorsaude.github.io/sorteios/', // endereço do site (vai no e-mail)
   WHATSAPP_CONTATO: '553239380908', // igual ao whatsapp do config.js
   FUSO: 'America/Sao_Paulo', // UTC-3 (Brasília); o setup aplica este fuso na planilha
   MAX_NUMEROS_POR_CADASTRO: 50, // limite da quantidade que o vendedor pode dar a uma pessoa
   ENVIAR_EMAIL: true,
 };
 
-// Colunas da aba da rifa (1 = A). Uma linha por número.
+// Colunas da aba de cadastros (1 = A). Uma linha por número.
 const COL = { DATA: 1, NOME: 2, TELEFONE: 3, EMAIL: 4, NASCIMENTO: 5, VENDEDOR: 6, NUMERO: 7, STATUS: 8, ATUALIZADO_EM: 9, ATUALIZADO_POR: 10 };
 const N_COLS = 10;
 const CABECALHO = ['Data', 'Nome', 'Telefone', 'E-mail', 'Nascimento', 'Vendedor', 'Número', 'Status', 'Atualizado em', 'Atualizado por'];
@@ -455,7 +455,7 @@ function setup() {
     Logger.log('Aba Vendedores já existia. Nada foi alterado nela.');
   }
   CacheService.getScriptCache().remove(CACHE_STATUS);
-  Logger.log('Pronto. Aba da rifa: ' + CONFIG.ABA_VENDAS);
+  Logger.log('Pronto. Aba de cadastros: ' + CONFIG.ABA_VENDAS);
 }
 
 // ===========================================================================
@@ -480,8 +480,8 @@ function montarEmail_(d) {
   const quando = Utilities.formatDate(d.quando, CONFIG.FUSO, "dd/MM/yyyy 'às' HH:mm");
   const zap = 'https://wa.me/' + CONFIG.WHATSAPP_CONTATO;
   const assunto = n <= 5
-    ? (varios ? 'Seus números da ' : 'Seu número da ') + CONFIG.TITULO + ': ' + nums.join(', ')
-    : 'Seus ' + n + ' números da ' + CONFIG.TITULO + ' estão confirmados';
+    ? (varios ? 'Seus números no sorteio ' : 'Seu número no sorteio ') + CONFIG.TITULO + ': ' + nums.join(', ')
+    : 'Seus ' + n + ' números no sorteio ' + CONFIG.TITULO + ' estão confirmados';
 
   const OURO = '#f5b301', PRETO = '#0b0b0b', TEXTO = '#1f1f1f', SUAVE = '#6b6b6b', LINHA = '#ececec';
   const fonte = "font-family:'Segoe UI',Roboto,Helvetica,Arial,sans-serif;";
@@ -516,7 +516,7 @@ function montarEmail_(d) {
     '<tr><td style="padding:30px 32px 8px;color:' + TEXTO + '">' +
     '<p style="margin:0 0 12px;font-size:17px;font-weight:700">Olá, ' + esc_(primeiro) + '!</p>' +
     '<p style="margin:0 0 22px;font-size:15px;line-height:1.6;color:#3a3a3a">Sua participação está <strong>confirmada</strong>. ' +
-    'Obrigado por participar e apoiar esta ação solidária: cada número ajuda quem mais precisa neste fim de ano.</p>' +
+    'Obrigado por participar! Agora é só aguardar o sorteio e torcer.</p>' +
     '<p style="margin:0 0 10px;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:' + SUAVE + '">' +
     (varios ? 'Seus ' + n + ' números' : 'Seu número') + '</p>' +
     '<div style="margin:0 0 18px">' + chips + '</div>' +
@@ -531,7 +531,7 @@ function montarEmail_(d) {
     // botão
     '<tr><td align="center" style="padding:18px 32px 8px">' +
     '<a href="' + CONFIG.LINK_SITE + '" style="display:inline-block;background:' + PRETO + ';color:' + OURO + ';text-decoration:none;font-size:15px;font-weight:700;padding:14px 28px;border-radius:999px">' +
-    'Acompanhar a rifa</a>' +
+    'Acompanhar o sorteio</a>' +
     '<p style="margin:12px 0 0;font-size:12px;line-height:1.5;color:' + SUAVE + '">Para consultar seus números no site, use este e-mail e a sua data de nascimento.</p>' +
     '</td></tr>' +
 
@@ -548,12 +548,12 @@ function montarEmail_(d) {
 
   const texto = [
     'Olá, ' + primeiro + '!', '',
-    'Sua participação na ' + CONFIG.TITULO + ' está confirmada. Obrigado por apoiar esta ação solidária.', '',
+    'Sua participação no sorteio ' + CONFIG.TITULO + ' está confirmada. Obrigado por participar!', '',
     (varios ? 'Seus números: ' : 'Seu número: ') + nums.join(', '),
     'Prêmio: ' + CONFIG.PREMIO,
     'Sorteio: ' + CONFIG.DATA_SORTEIO_TEXTO,
     'Cadastro: ' + quando + (d.vendedor ? ' (vendedor: ' + d.vendedor + ')' : ''), '',
-    'Acompanhe a rifa: ' + CONFIG.LINK_SITE,
+    'Acompanhe o sorteio: ' + CONFIG.LINK_SITE,
     'Para consultar seus números no site, use este e-mail e a sua data de nascimento.', '',
     'Dúvidas? WhatsApp: ' + zap, '',
     CONFIG.ORGANIZACAO,
