@@ -11,7 +11,6 @@
         churrasqueira: '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 20h32a16 12 0 0 1-32 0z"/><path d="M8 20h32"/><path d="M16 31l-5 12M32 31l5 12M24 32v11"/><path d="M18 8c-2 3 2 4 0 7M24 6c-2 3 2 5 0 9M30 8c-2 3 2 4 0 7"/></svg>',
         misteira: '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 27a16 9 0 0 1 32 0z"/><rect x="7" y="27" width="34" height="9" rx="3"/><path d="M40 30h4"/><path d="M13 36v3M35 36v3"/><circle cx="13" cy="31.5" r="1.2"/><path d="M19 21c1.5-1 3-1 4.5 0s3 1 4.5 0"/></svg>',
         presente: '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="18" width="32" height="8" rx="2"/><path d="M11 26v14h26V26"/><path d="M24 18v22"/><path d="M24 18c-3-6-11-7-11-2s8 2 11 2c3 0 11 3 11-2s-8-4-11 2z"/></svg>',
-        ventilador: '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="18" r="14"/><circle cx="24" cy="18" r="2.5"/><path d="M24 15.5c-1-5 2-8 5-8M26.3 19.2c4.6 1.8 5.4 5.9 3.6 8.4M21.6 19.4c-3.9 3.1-7.9 2-9.2-.8"/><path d="M24 32v7M16 42h16"/></svg>',
     };
 
     let estado = { total: C.totalNumeros, ocupados: 0, carregado: false };

@@ -4,7 +4,7 @@
  */
 window.CONFIG = {
   // URL da implantação do Apps Script (continua a mesma se publicar como "Nova versão")
-  apiUrl: 'https://script.google.com/macros/s/AKfycbzJjAnElX4wp9KrArYKEU5foVnnYa9FHvRj_S_a4WBnjaF4K1uc10LbRDpD69_CkKLf/exec',
+  apiUrl: 'https://script.google.com/macros/s/AKfycbzKyAaF13MoAT49-rz5yFXXjovEWFLnXWTibXDWfzvvGmTseehnLhjgIK2kOCdB0GR8/exec',
 
   ano: 2026,
   organizacao: 'AS e CDT · São João del-Rei',
@@ -31,7 +31,6 @@ window.CONFIG = {
       { nome: 'Batedeira', detalhe: 'Bolos, massas e receitas caprichadas', icone: 'batedeira' },
       { nome: 'Liquidificador', detalhe: 'Sucos, vitaminas e receitas do dia a dia', icone: 'liquidificador' },
       { nome: 'Churrasqueira', detalhe: 'Para reunir a família e os amigos', icone: 'churrasqueira' },
-      { nome: 'Ventilador', detalhe: 'Alívio garantido no calor de dezembro', icone: 'ventilador' },
       { nome: 'Misteira', detalhe: 'Para aquele misto quente caprichado', icone: 'misteira' }
     ],
   },

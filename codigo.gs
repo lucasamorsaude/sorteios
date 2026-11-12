@@ -21,7 +21,7 @@ const CONFIG = {
   TITULO: 'Black November CDT e AS',            // nome curto (remetente e título do e-mail)
   SELO: 'Sorteio 2026',                         // etiqueta no topo do e-mail
   ORGANIZACAO: 'AS e CDT · São João del-Rei',
-  PREMIO: 'Kit eletrodomésticos: batedeira, liquidificador, churrasqueira, ventilador e misteira',
+  PREMIO: 'Kit eletrodomésticos: batedeira, liquidificador, churrasqueira e misteira',
   DATA_SORTEIO_TEXTO: '04/12/2026 às 15h', // A DEFINIR: igual ao dataSorteio do config.js
   LINK_SITE: 'https://lucasamorsaude.github.io/sorteios/', // endereço do site (vai no e-mail)
   WHATSAPP_CONTATO: '553239380908', // igual ao whatsapp do config.js
